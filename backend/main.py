@@ -22,13 +22,18 @@ class MatchState(BaseModel):
     batting_rating: float
     bowling_rating: float
 
+class SimulationResponse(BaseModel):
+    win_probability: float
+    simulations: int
+    required_run_rate: float
+    pressure_index: float
 
 @app.get("/")
 def home():
     return {"status": "Cricket AI Running"}
 
 
-@app.post("/simulate")
+@app.post("/simulate", response_model=SimulationResponse)
 def simulate(state: MatchState):
 
     wins = 0
