@@ -40,7 +40,18 @@ def simulate(state: MatchState):
 
     probability = round((wins / simulations) * 100, 2)
 
+    # New Metrics
+    required_run_rate = round(
+        state.runs_required / (state.balls_remaining / 6), 2
+    )
+
+    pressure_index = round(
+        (required_run_rate / state.batting_rating) * 10, 2
+    )
+
     return {
         "win_probability": probability,
-        "simulations": simulations
+        "simulations": simulations,
+        "required_run_rate": required_run_rate,
+        "pressure_index": pressure_index
     }
